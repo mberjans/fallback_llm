@@ -96,11 +96,16 @@ class FallbackLLM:
     def __init__(self, retry_config: Optional[RetryConfig] = None):
         """Initialize the fallback LLM system"""
         self.retry_config = retry_config or RetryConfig()
-        self.fallback_order = ['cerebras', 'groq', 'cloudflare', 'openrouter']
+
+        # Load configuration from JSON file first
+        self.config = self._load_config()
+
+        # Load fallback order from config, with fallback to default
+        self.fallback_order = self.config.get('fallback_order', ['cerebras', 'groq', 'cloudflare', 'openrouter'])
         self.provider_health = {
             provider: ProviderHealth() for provider in self.fallback_order
         }
-        
+
         # Load API keys from environment
         self.api_keys = self._load_api_keys()
 
@@ -119,37 +124,89 @@ class FallbackLLM:
         # Model performance tracking
         self.model_performance = {}
         
-        # Model configurations
-        self.models = {
-            'cerebras': [
-                'llama-4-scout-17b-16e-instruct',
-                'llama-3.3-70b',
-                'llama3.1-8b',
-                'qwen-3-32b'
-            ],
-            'groq': [
-                'meta-llama/llama-4-maverick-17b-128e-instruct',
-                'meta-llama/llama-4-scout-17b-16e-instruct',
-                'qwen/qwen3-32b',
-                'llama-3.1-8b-instant',
-                'llama-3.3-70b-versatile'
-            ],
-            'cloudflare': [
-                '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b',
-                '@cf/mistral/mistral-small-3.1-24b-instruct',
-                '@cf/meta/llama-4-scout-17b-16e-instruct',
-                '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
-                '@cf/meta/llama-3.1-70b-instruct',
-                '@cf/qwen/qwq-32b'
-            ],
-            'openrouter': [
-                'mistralai/mistral-nemo:free',
-                'tngtech/deepseek-r1t-chimera:free',
-                'google/gemini-2.0-flash-exp:free',
-                'mistralai/mistral-small-3.1-24b-instruct:free'
-            ]
+        # Load model configurations from config file
+        self.models = self._load_models_from_config()
+
+    def _load_config(self) -> Dict:
+        """Load configuration from models_config.json file"""
+        config_file = 'models_config.json'
+        try:
+            if os.path.exists(config_file):
+                with open(config_file, 'r') as f:
+                    return json.load(f)
+            else:
+                print(f"⚠️  Configuration file {config_file} not found, using defaults")
+                return {}
+        except Exception as e:
+            print(f"⚠️  Error loading configuration: {e}, using defaults")
+            return {}
+
+    def _load_models_from_config(self) -> Dict[str, List[str]]:
+        """Load model configurations from config file"""
+        models = {}
+        providers = self.config.get('providers', {})
+
+        for provider_name, provider_config in providers.items():
+            provider_models = provider_config.get('models', [])
+            # Sort models by priority (lower number = higher priority)
+            sorted_models = sorted(provider_models, key=lambda m: m.get('priority', 999))
+            # Extract just the model IDs
+            models[provider_name] = [model['id'] for model in sorted_models]
+
+        # Fallback to hardcoded models if config is empty
+        if not models:
+            models = {
+                'cerebras': [
+                    'llama-4-scout-17b-16e-instruct',
+                    'llama-3.3-70b',
+                    'llama3.1-8b',
+                    'qwen-3-32b'
+                ],
+                'groq': [
+                    'meta-llama/llama-4-maverick-17b-128e-instruct',
+                    'meta-llama/llama-4-scout-17b-16e-instruct',
+                    'qwen/qwen3-32b',
+                    'llama-3.1-8b-instant',
+                    'llama-3.3-70b-versatile'
+                ],
+                'cloudflare': [
+                    '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b',
+                    '@cf/mistral/mistral-small-3.1-24b-instruct',
+                    '@cf/meta/llama-4-scout-17b-16e-instruct',
+                    '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+                    '@cf/meta/llama-3.1-70b-instruct',
+                    '@cf/qwen/qwq-32b'
+                ],
+                'openrouter': [
+                    'mistralai/mistral-nemo:free',
+                    'tngtech/deepseek-r1t-chimera:free',
+                    'google/gemini-2.0-flash-exp:free',
+                    'mistralai/mistral-small-3.1-24b-instruct:free'
+                ]
+            }
+
+        return models
+
+    def get_model_info(self, provider: str, model_id: str) -> Dict:
+        """Get detailed model information from config"""
+        providers = self.config.get('providers', {})
+        provider_config = providers.get(provider, {})
+        models = provider_config.get('models', [])
+
+        for model in models:
+            if model['id'] == model_id:
+                return model
+
+        # Return basic info if not found in config
+        return {
+            'id': model_id,
+            'name': model_id,
+            'description': f'Model {model_id} from {provider}',
+            'max_tokens': 8192,
+            'context_length': 32768,
+            'priority': 999
         }
-    
+
     def _load_api_keys(self) -> Dict[str, str]:
         """Load API keys from environment variables"""
         api_keys = {}
@@ -583,7 +640,13 @@ class FallbackLLM:
                 avg_time = f"{model.average_response_time:.2f}s" if model.average_response_time > 0 else "N/A"
                 last_tested = model.last_tested or "Never"
 
-                report_lines.append(f"| `{model.model_id}` | {model.total_requests} | {model.success_rate:.1f}% | {avg_time} | {min_time} | {max_time} | {last_tested} |")
+                # Get model info from config for enhanced display
+                model_info = self.get_model_info(model.provider, model.model_id)
+                model_display = f"`{model.model_id}`"
+                if model_info.get('name') != model.model_id:
+                    model_display = f"`{model.model_id}` ({model_info.get('name', '')})"
+
+                report_lines.append(f"| {model_display} | {model.total_requests} | {model.success_rate:.1f}% | {avg_time} | {min_time} | {max_time} | {last_tested} |")
 
             report_lines.append("")
 
