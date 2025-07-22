@@ -2,6 +2,7 @@
 
 # Core dependencies
 requests>=2.25.0
+cloudflare>=3.0.0
 
 # Optional dependencies for enhanced functionality
 # python-dotenv>=0.19.0  # For .env file support (optional - built-in support included)

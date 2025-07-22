@@ -32,6 +32,12 @@ from dataclasses import dataclass
 from enum import Enum
 from datetime import datetime
 
+try:
+    from cloudflare import Cloudflare
+    CLOUDFLARE_AVAILABLE = True
+except ImportError:
+    CLOUDFLARE_AVAILABLE = False
+
 class ProviderStatus(Enum):
     """Provider status enumeration"""
     HEALTHY = "healthy"
@@ -90,13 +96,16 @@ class FallbackLLM:
     def __init__(self, retry_config: Optional[RetryConfig] = None):
         """Initialize the fallback LLM system"""
         self.retry_config = retry_config or RetryConfig()
-        self.fallback_order = ['cerebras', 'groq', 'openrouter']
+        self.fallback_order = ['cerebras', 'groq', 'cloudflare', 'openrouter']
         self.provider_health = {
             provider: ProviderHealth() for provider in self.fallback_order
         }
         
         # Load API keys from environment
         self.api_keys = self._load_api_keys()
+
+        # Store Cloudflare account ID
+        self.cloudflare_account_id = os.getenv('CLOUDFLARE_ACCOUNT_ID')
         
         # Statistics tracking
         self.stats = {
@@ -125,6 +134,14 @@ class FallbackLLM:
                 'llama-3.1-8b-instant',
                 'llama-3.3-70b-versatile'
             ],
+            'cloudflare': [
+                '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b',
+                '@cf/mistral/mistral-small-3.1-24b-instruct',
+                '@cf/meta/llama-4-scout-17b-16e-instruct',
+                '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+                '@cf/meta/llama-3.1-70b-instruct',
+                '@cf/qwen/qwq-32b'
+            ],
             'openrouter': [
                 'mistralai/mistral-nemo:free',
                 'tngtech/deepseek-r1t-chimera:free',
@@ -150,6 +167,7 @@ class FallbackLLM:
         # Load API keys
         api_keys['cerebras'] = os.getenv('CEREBRAS_API_KEY')
         api_keys['groq'] = os.getenv('GROQ_API_KEY')
+        api_keys['cloudflare'] = os.getenv('CLOUDFLARE_API_TOKEN')
         api_keys['openrouter'] = os.getenv('OPENROUTER_API_KEY')
         
         return api_keys
@@ -256,6 +274,8 @@ class FallbackLLM:
                 response, success, is_rate_limit = self._cerebras_request(model_id, question, max_tokens)
             elif provider == "groq":
                 response, success, is_rate_limit = self._groq_request(model_id, question, max_tokens)
+            elif provider == "cloudflare":
+                response, success, is_rate_limit = self._cloudflare_request(model_id, question, max_tokens)
             elif provider == "openrouter":
                 response, success, is_rate_limit = self._openrouter_request(model_id, question, max_tokens)
             else:
@@ -367,7 +387,66 @@ class FallbackLLM:
         response.raise_for_status()
         result = response.json()
         return result['choices'][0]['message']['content'].strip(), True, False
-    
+
+    def _cloudflare_request(self, model_id: str, question: str, max_tokens: int) -> Tuple[str, bool, bool]:
+        """Make request to Cloudflare Workers AI"""
+        if not CLOUDFLARE_AVAILABLE:
+            return "", False, False
+
+        api_token = self.api_keys.get('cloudflare')
+        if not api_token or not self.cloudflare_account_id:
+            return "", False, False
+
+        try:
+            # Initialize Cloudflare client
+            client = Cloudflare(api_token=api_token)
+
+            # Prepare messages in the format expected by Cloudflare
+            messages = [{"role": "user", "content": question}]
+
+            # Make the API call
+            response = client.ai.run(
+                account_id=self.cloudflare_account_id,
+                model_name=model_id,
+                messages=messages
+            )
+
+            # Extract the response content
+            # Cloudflare returns a dict directly
+            if isinstance(response, dict):
+                if 'response' in response:
+                    content = response['response']
+                    return content.strip(), True, False
+                elif 'content' in response:
+                    content = response['content']
+                    return content.strip(), True, False
+                elif 'text' in response:
+                    content = response['text']
+                    return content.strip(), True, False
+                else:
+                    # Fallback: convert entire response to string
+                    content = str(response)
+                    return content.strip(), True, False
+            elif hasattr(response, 'result'):
+                # Handle object-style response
+                if hasattr(response.result, 'response'):
+                    content = response.result.response
+                    return content.strip(), True, False
+                elif isinstance(response.result, dict):
+                    if 'response' in response.result:
+                        content = response.result['response']
+                        return content.strip(), True, False
+
+            return "", False, False
+
+        except Exception as e:
+            error_msg = str(e).lower()
+            if 'rate limit' in error_msg or 'too many requests' in error_msg:
+                return "", False, True  # Rate limited
+            else:
+                print(f"❌ Cloudflare API error: {e}")
+                return "", False, False
+
     def _calculate_delay(self, attempt: int, provider_name: str = "", model_name: str = "") -> float:
         """Calculate delay for exponential backoff with detailed logging"""
         import random
@@ -577,6 +656,7 @@ Examples:
   python fallback_llm.py "What is machine learning?"
   python fallback_llm.py "Explain quantum computing" --max-tokens 500
   python fallback_llm.py "Write a Python function" --provider groq
+  python fallback_llm.py "Explain AI concepts" --provider cloudflare
   python fallback_llm.py "Summarize this text" --max-attempts 3 --base-delay 1.0
   python fallback_llm.py "Test question" --all-model-provider-report --verbose
   python fallback_llm.py "Custom test" --all-model-provider-report --report-output my_report.md
@@ -597,7 +677,7 @@ Examples:
     
     parser.add_argument(
         '--provider',
-        choices=['cerebras', 'groq', 'openrouter'],
+        choices=['cerebras', 'groq', 'cloudflare', 'openrouter'],
         help='Specific provider to use (default: use fallback order)'
     )
     
@@ -678,11 +758,22 @@ Examples:
     llm = FallbackLLM(retry_config=retry_config)
     
     # Check API keys
-    available_providers = [p for p in llm.fallback_order if llm.api_keys.get(p)]
+    available_providers = []
+    for p in llm.fallback_order:
+        if p == 'cloudflare':
+            # Cloudflare needs both API token and account ID
+            if llm.api_keys.get(p) and llm.cloudflare_account_id and CLOUDFLARE_AVAILABLE:
+                available_providers.append(p)
+        else:
+            if llm.api_keys.get(p):
+                available_providers.append(p)
+
     if not available_providers:
         print("❌ No API keys found! Please set environment variables:")
-        print("   CEREBRAS_API_KEY, GROQ_API_KEY, OPENROUTER_API_KEY")
+        print("   CEREBRAS_API_KEY, GROQ_API_KEY, CLOUDFLARE_API_TOKEN+CLOUDFLARE_ACCOUNT_ID, OPENROUTER_API_KEY")
         print("   Or create a .env file with these keys")
+        if not CLOUDFLARE_AVAILABLE:
+            print("   Note: Install 'cloudflare' package for Cloudflare Workers AI support")
         sys.exit(1)
     
     if args.verbose:
