@@ -1,0 +1,924 @@
+{
+  "metadata": {
+    "version": "4.0",
+    "created": "2025-07-17 13:34:31",
+    "description": "Comprehensive ranking combining Groq, Cerebras, and OpenRouter models",
+    "total_models": 25,
+    "providers": {
+      "Groq": 6,
+      "Cerebras": 4,
+      "OpenRouter": 15
+    },
+    "source_files": [
+      "free_models_reasoning_ranked_v2.json (Groq/Cerebras)",
+      "free_models_reasoning_ranked_v3.json (OpenRouter)"
+    ],
+    "ranking_criteria": "reasoning_score (descending)",
+    "score_range": "8.0 - 10.0"
+  },
+  "models": [
+    {
+      "rank": 1,
+      "model_name": "Google: Gemini 2.0 Flash Experimental (free)",
+      "model_id": "google/gemini-2.0-flash-exp:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 10.0,
+      "average_response_time": 1.74,
+      "success_rate": 100.0,
+      "context_tokens": 1048576,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Fastest response (1.74s)",
+        "Perfect metabolite detection (100%)",
+        "Massive context (1M tokens)",
+        "Ultra-fast processing",
+        "Revolutionary performance"
+      ],
+      "test_results": {
+        "logical_deduction": 10,
+        "mathematical_reasoning": 10,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 1.74,
+        "content_length": 399,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 115,
+          "total_tokens": 230
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "model_name": "Llama 4 Maverick",
+      "model_id": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "provider": "Groq",
+      "reasoning_score": 9.9,
+      "average_response_time": 1.45,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.groq.com/openai/v1/chat/completions",
+      "api_key_env": "GROQ_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Highest F1 score (0.5104)",
+        "Best biomarker detection (83.1% recall)",
+        "Most comprehensive extraction",
+        "Perfect reasoning",
+        "Excellent for research"
+      ],
+      "test_results": {
+        "logical_deduction": 10,
+        "mathematical_reasoning": 10,
+        "pattern_recognition": 10,
+        "causal_reasoning": 9
+      },
+      "foodb_performance": {
+        "f1_score": 0.5104,
+        "precision": 0.3684,
+        "recall": 0.8305,
+        "processing_time": 393.4,
+        "metabolites_extracted": 154,
+        "biomarkers_detected": 49
+      }
+    },
+    {
+      "rank": 3,
+      "model_name": "Meta: Llama 3.2 11B Vision Instruct (free)",
+      "model_id": "meta-llama/llama-3.2-11b-vision-instruct:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.9,
+      "average_response_time": 1.8,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Ultra-fast (1.80s)",
+        "Perfect metabolite detection (100%)",
+        "Vision model excelling at text",
+        "Excellent for multimodal tasks",
+        "Meta flagship"
+      ],
+      "test_results": {
+        "logical_deduction": 10,
+        "mathematical_reasoning": 9,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 1.8,
+        "content_length": 387,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 112,
+          "total_tokens": 227
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "model_name": "Llama 4 Scout",
+      "model_id": "meta-llama/llama-4-scout-17b-16e-instruct",
+      "provider": "Groq",
+      "reasoning_score": 9.8,
+      "average_response_time": 1.23,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.groq.com/openai/v1/chat/completions",
+      "api_key_env": "GROQ_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Best speed-accuracy balance",
+        "Fastest processing (124.4s)",
+        "Excellent F1 score (0.5081)",
+        "High efficiency",
+        "Recommended for production"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 10,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "foodb_performance": {
+        "f1_score": 0.5081,
+        "precision": 0.373,
+        "recall": 0.7966,
+        "processing_time": 124.4,
+        "metabolites_extracted": 142,
+        "biomarkers_detected": 47
+      }
+    },
+    {
+      "rank": 5,
+      "model_name": "Llama 4 Scout",
+      "model_id": "llama-4-scout-17b-16e-instruct",
+      "provider": "Cerebras",
+      "reasoning_score": 9.8,
+      "average_response_time": 0.59,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.cerebras.ai/v1/chat/completions",
+      "api_key_env": "CEREBRAS_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Fastest reasoning",
+        "Highest score",
+        "Perfect math (10/10)",
+        "Excellent logic (9/10)",
+        "Perfect patterns (10/10)",
+        "Perfect causal reasoning (10/10)"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 10,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      }
+    },
+    {
+      "rank": 6,
+      "model_name": "Mistral: Mistral Small 3.1 24B (free)",
+      "model_id": "mistralai/mistral-small-3.1-24b-instruct:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.8,
+      "average_response_time": 1.97,
+      "success_rate": 100.0,
+      "context_tokens": 128000,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Most reliable category",
+        "Ultra-fast (1.97s)",
+        "Perfect metabolite detection (100%)",
+        "Excellent for production",
+        "Mistral quality"
+      ],
+      "test_results": {
+        "logical_deduction": 10,
+        "mathematical_reasoning": 9,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 1.97,
+        "content_length": 482,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 131,
+          "total_tokens": 246
+        }
+      }
+    },
+    {
+      "rank": 7,
+      "model_name": "Mistral: Mistral Nemo (free)",
+      "model_id": "mistralai/mistral-nemo:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.7,
+      "average_response_time": 2.86,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Fast processing (2.86s)",
+        "Perfect metabolite detection (100%)",
+        "Reliable Mistral architecture",
+        "Excellent for general use",
+        "Proven performance"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 9,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 2.86,
+        "content_length": 320,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 95,
+          "total_tokens": 210
+        }
+      }
+    },
+    {
+      "rank": 8,
+      "model_name": "Qwen 3 32B",
+      "model_id": "qwen/qwen3-32b",
+      "provider": "Groq",
+      "reasoning_score": 9.6,
+      "average_response_time": 2.15,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.groq.com/openai/v1/chat/completions",
+      "api_key_env": "GROQ_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Excellent F1 score (0.5056)",
+        "Good recall (76.3%)",
+        "Consistent performance",
+        "Alternative architecture",
+        "Reliable results"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 9,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "foodb_performance": {
+        "f1_score": 0.5056,
+        "precision": 0.3782,
+        "recall": 0.7627,
+        "processing_time": 237.6,
+        "metabolites_extracted": 136,
+        "biomarkers_detected": 45
+      }
+    },
+    {
+      "rank": 9,
+      "model_name": "Meta: Llama 3.3 70B Instruct (free)",
+      "model_id": "meta-llama/llama-3.3-70b-instruct:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.6,
+      "average_response_time": 3.21,
+      "success_rate": 100.0,
+      "context_tokens": 65536,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Enterprise-grade model",
+        "Fast processing (3.21s)",
+        "Perfect metabolite detection (100%)",
+        "Meta flagship 70B",
+        "Excellent for business use"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 10,
+        "pattern_recognition": 10,
+        "causal_reasoning": 9
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 3.21,
+        "content_length": 672,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 185,
+          "total_tokens": 300
+        }
+      }
+    },
+    {
+      "rank": 10,
+      "model_name": "Llama 3.3 70B Versatile",
+      "model_id": "llama-3.3-70b-versatile",
+      "provider": "Groq",
+      "reasoning_score": 9.5,
+      "average_response_time": 1.34,
+      "success_rate": 100.0,
+      "delay_in_seconds": 10,
+      "context_tokens": 131072,
+      "api_url": "https://api.groq.com/openai/v1/chat/completions",
+      "api_key_env": "GROQ_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Large 70B model",
+        "Good speed for size",
+        "Solid F1 score (0.4706)",
+        "Good recall (74.6%)",
+        "Versatile performance"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 10,
+        "pattern_recognition": 10,
+        "causal_reasoning": 9
+      },
+      "foodb_performance": {
+        "f1_score": 0.4706,
+        "precision": 0.3438,
+        "recall": 0.7458,
+        "processing_time": 132.8,
+        "metabolites_extracted": 151,
+        "biomarkers_detected": 44
+      }
+    },
+    {
+      "rank": 11,
+      "model_name": "Llama 3.3 70B",
+      "model_id": "llama-3.3-70b",
+      "provider": "Cerebras",
+      "reasoning_score": 9.5,
+      "average_response_time": 0.62,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.cerebras.ai/v1/chat/completions",
+      "api_key_env": "CEREBRAS_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Ultra-fast",
+        "Perfect math (10/10)",
+        "Excellent logic (9/10)",
+        "Perfect patterns (10/10)",
+        "Strong causal reasoning (9/10)"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 10,
+        "pattern_recognition": 10,
+        "causal_reasoning": 9
+      }
+    },
+    {
+      "rank": 12,
+      "model_name": "Google: Gemma 3 12B (free)",
+      "model_id": "google/gemma-3-12b-it:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.5,
+      "average_response_time": 3.92,
+      "success_rate": 100.0,
+      "context_tokens": 96000,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Balanced performance",
+        "Good speed (3.92s)",
+        "Perfect metabolite detection (100%)",
+        "Google quality",
+        "Reliable for production"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 9,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 3.92,
+        "content_length": 522,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 142,
+          "total_tokens": 257
+        }
+      }
+    },
+    {
+      "rank": 13,
+      "model_name": "Mistral: Mistral Small 3.2 24B (free)",
+      "model_id": "mistralai/mistral-small-3.2-24b-instruct:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.4,
+      "average_response_time": 4.1,
+      "success_rate": 100.0,
+      "context_tokens": 96000,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Solid performance",
+        "Good speed (4.10s)",
+        "Perfect metabolite detection (100%)",
+        "Mistral reliability",
+        "Excellent for research"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 9,
+        "pattern_recognition": 10,
+        "causal_reasoning": 9
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 4.1,
+        "content_length": 621,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 168,
+          "total_tokens": 283
+        }
+      }
+    },
+    {
+      "rank": 14,
+      "model_name": "DeepSeek: DeepSeek V3 (free)",
+      "model_id": "deepseek/deepseek-chat:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.3,
+      "average_response_time": 4.6,
+      "success_rate": 100.0,
+      "context_tokens": 163840,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Proven reliability",
+        "Good speed (4.60s)",
+        "Perfect metabolite detection (100%)",
+        "Large context",
+        "Excellent baseline"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 4.6,
+        "content_length": 344,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 98,
+          "total_tokens": 213
+        }
+      }
+    },
+    {
+      "rank": 15,
+      "model_name": "Google: Gemma 3 27B (free)",
+      "model_id": "google/gemma-3-27b-it:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.2,
+      "average_response_time": 4.76,
+      "success_rate": 100.0,
+      "context_tokens": 96000,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Detailed responses",
+        "Good speed (4.76s)",
+        "Perfect metabolite detection (100%)",
+        "Google flagship",
+        "Excellent for analysis"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 9,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 4.76,
+        "content_length": 671,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 182,
+          "total_tokens": 297
+        }
+      }
+    },
+    {
+      "rank": 16,
+      "model_name": "Moonshot AI: Kimi VL A3B Thinking (free)",
+      "model_id": "moonshotai/kimi-vl-a3b-thinking:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.1,
+      "average_response_time": 7.29,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Comprehensive analysis",
+        "Detailed responses",
+        "Perfect metabolite detection (100%)",
+        "Thinking model",
+        "Excellent for research"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 7.29,
+        "content_length": 1310,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 355,
+          "total_tokens": 470
+        }
+      }
+    },
+    {
+      "rank": 17,
+      "model_name": "Llama 3.1 8B Instant",
+      "model_id": "llama-3.1-8b-instant",
+      "provider": "Groq",
+      "reasoning_score": 9.0,
+      "average_response_time": 0.95,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.groq.com/openai/v1/chat/completions",
+      "api_key_env": "GROQ_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Proven baseline",
+        "Solid F1 score (0.5000)",
+        "Good recall (79.7%)",
+        "Reliable processing",
+        "Well-tested stability"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 9,
+        "causal_reasoning": 10
+      },
+      "foodb_performance": {
+        "f1_score": 0.5,
+        "precision": 0.3643,
+        "recall": 0.7966,
+        "processing_time": 169.5,
+        "metabolites_extracted": 143,
+        "biomarkers_detected": 47
+      }
+    },
+    {
+      "rank": 18,
+      "model_name": "DeepSeek: DeepSeek V3 Base (free)",
+      "model_id": "deepseek/deepseek-v3-base:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 9.0,
+      "average_response_time": 8.01,
+      "success_rate": 100.0,
+      "context_tokens": 163840,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Advanced base model",
+        "Good performance",
+        "Perfect metabolite detection (100%)",
+        "Large context",
+        "Excellent for development"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 9,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 8.01,
+        "content_length": 418,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 119,
+          "total_tokens": 234
+        }
+      }
+    },
+    {
+      "rank": 19,
+      "model_name": "Qwen: Qwen3 235B A22B (free)",
+      "model_id": "qwen/qwen3-235b-a22b:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 8.9,
+      "average_response_time": 8.1,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Massive 235B model",
+        "Powerful performance",
+        "Perfect metabolite detection (100%)",
+        "Qwen architecture",
+        "Excellent for complex tasks"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 9,
+        "causal_reasoning": 10
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 8.1,
+        "content_length": 1067,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 289,
+          "total_tokens": 404
+        }
+      }
+    },
+    {
+      "rank": 20,
+      "model_name": "TNG: DeepSeek R1T Chimera (free)",
+      "model_id": "tngtech/deepseek-r1t-chimera:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 8.8,
+      "average_response_time": 9.06,
+      "success_rate": 100.0,
+      "context_tokens": 163840,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Thorough analysis",
+        "R1 reasoning style",
+        "Perfect metabolite detection (100%)",
+        "Large context",
+        "Excellent for detailed work"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 9,
+        "causal_reasoning": 9
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 9,
+        "total_metabolites": 9,
+        "detection_rate": 1.0,
+        "response_time": 9.06,
+        "content_length": 1542,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 417,
+          "total_tokens": 532
+        }
+      }
+    },
+    {
+      "rank": 21,
+      "model_name": "Llama 3.1 8B",
+      "model_id": "llama3.1-8b",
+      "provider": "Cerebras",
+      "reasoning_score": 8.5,
+      "average_response_time": 0.56,
+      "success_rate": 100.0,
+      "context_tokens": 8192,
+      "api_url": "https://api.cerebras.ai/v1/chat/completions",
+      "api_key_env": "CEREBRAS_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Fastest overall",
+        "Perfect logic (10/10)",
+        "Perfect patterns (10/10)",
+        "Perfect causal reasoning (10/10)",
+        "Budget option"
+      ],
+      "test_results": {
+        "logical_deduction": 10,
+        "mathematical_reasoning": 4,
+        "pattern_recognition": 10,
+        "causal_reasoning": 10
+      }
+    },
+    {
+      "rank": 22,
+      "model_name": "Nous: DeepHermes 3 Llama 3 8B Preview (free)",
+      "model_id": "nousresearch/deephermes-3-llama-3-8b-preview:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 8.5,
+      "average_response_time": 1.75,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Good",
+      "strengths": [
+        "Ultra-fast (1.75s)",
+        "Good metabolite detection (77.8%)",
+        "Nous Research quality",
+        "Efficient processing",
+        "Good for speed-critical tasks"
+      ],
+      "test_results": {
+        "logical_deduction": 8,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 9,
+        "causal_reasoning": 9
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 7,
+        "total_metabolites": 9,
+        "detection_rate": 0.778,
+        "response_time": 1.75,
+        "content_length": 264,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 76,
+          "total_tokens": 191
+        }
+      }
+    },
+    {
+      "rank": 23,
+      "model_name": "MoonshotAI: Kimi K2 (free)",
+      "model_id": "moonshotai/kimi-k2:free",
+      "provider": "OpenRouter",
+      "reasoning_score": 8.4,
+      "average_response_time": 2.22,
+      "success_rate": 100.0,
+      "context_tokens": 65536,
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "cost": "FREE",
+      "reliability": "Good",
+      "strengths": [
+        "Fast processing (2.22s)",
+        "Good metabolite detection (77.8%)",
+        "Moonshot AI architecture",
+        "Efficient for quick tasks",
+        "Alternative option"
+      ],
+      "test_results": {
+        "logical_deduction": 8,
+        "mathematical_reasoning": 8,
+        "pattern_recognition": 9,
+        "causal_reasoning": 9
+      },
+      "openrouter_performance": {
+        "metabolites_detected": 7,
+        "total_metabolites": 9,
+        "detection_rate": 0.778,
+        "response_time": 2.22,
+        "content_length": 318,
+        "token_usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 91,
+          "total_tokens": 206
+        }
+      }
+    },
+    {
+      "rank": 24,
+      "model_name": "Qwen 3 32B",
+      "model_id": "qwen-3-32b",
+      "provider": "Cerebras",
+      "reasoning_score": 8.2,
+      "average_response_time": 0.57,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.cerebras.ai/v1/chat/completions",
+      "api_key_env": "CEREBRAS_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Very fast",
+        "Excellent logic (9/10)",
+        "Strong patterns (9/10)",
+        "Strong causal reasoning (9/10)"
+      ],
+      "test_results": {
+        "logical_deduction": 9,
+        "mathematical_reasoning": 6,
+        "pattern_recognition": 9,
+        "causal_reasoning": 9
+      }
+    },
+    {
+      "rank": 25,
+      "model_name": "Moonshot AI: Kimi K2 Instruct",
+      "model_id": "moonshotai/kimi-k2-instruct",
+      "provider": "Groq",
+      "reasoning_score": 8.0,
+      "average_response_time": 1.75,
+      "success_rate": 100.0,
+      "context_tokens": 131072,
+      "api_url": "https://api.groq.com/openai/v1/chat/completions",
+      "api_key_env": "GROQ_API_KEY",
+      "cost": "FREE",
+      "reliability": "Perfect",
+      "strengths": [
+        "Unique architecture",
+        "Specialized performance",
+        "Good for specific use cases",
+        "Alternative option"
+      ],
+      "test_results": {
+        "logical_deduction": 8,
+        "mathematical_reasoning": 7,
+        "pattern_recognition": 8,
+        "causal_reasoning": 9
+      },
+      "foodb_performance": {
+        "f1_score": 0.4053,
+        "precision": 0.3298,
+        "recall": 0.5254,
+        "processing_time": 175.6,
+        "metabolites_extracted": 104,
+        "biomarkers_detected": 31
+      }
+    }
+  ]
+}

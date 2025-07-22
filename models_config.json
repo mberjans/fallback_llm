@@ -157,40 +157,169 @@
       "priority": 4,
       "models": [
         {
-          "id": "mistralai/mistral-nemo:free",
-          "name": "Mistral Nemo (Free)",
-          "description": "High-quality free model from Mistral AI",
-          "max_tokens": 8192,
-          "context_length": 128000,
-          "priority": 1,
-          "cost": "free"
-        },
-        {
-          "id": "tngtech/deepseek-r1t-chimera:free",
-          "name": "DeepSeek R1T Chimera (Free)",
-          "description": "Advanced reasoning model with strong analytical capabilities",
-          "max_tokens": 8192,
-          "context_length": 32768,
-          "priority": 2,
-          "cost": "free"
-        },
-        {
           "id": "google/gemini-2.0-flash-exp:free",
-          "name": "Google Gemini 2.0 Flash (Free)",
-          "description": "Google's latest experimental model",
+          "name": "Google Gemini 2.0 Flash Experimental (Free)",
+          "description": "Fastest response with perfect metabolite detection and massive context",
           "max_tokens": 8192,
-          "context_length": 1000000,
-          "priority": 3,
-          "cost": "free"
+          "context_length": 1048576,
+          "priority": 1,
+          "cost": "free",
+          "reasoning_score": 10.0,
+          "average_response_time": 1.74
+        },
+        {
+          "id": "meta-llama/llama-3.2-11b-vision-instruct:free",
+          "name": "Meta Llama 3.2 11B Vision Instruct (Free)",
+          "description": "Ultra-fast vision model excelling at text with perfect detection",
+          "max_tokens": 8192,
+          "context_length": 131072,
+          "priority": 2,
+          "cost": "free",
+          "reasoning_score": 9.9,
+          "average_response_time": 1.8
         },
         {
           "id": "mistralai/mistral-small-3.1-24b-instruct:free",
-          "name": "Mistral Small 3.1 (Free)",
-          "description": "Efficient instruction-following model",
+          "name": "Mistral Small 3.1 24B (Free)",
+          "description": "Most reliable category with ultra-fast processing and perfect detection",
           "max_tokens": 8192,
           "context_length": 128000,
+          "priority": 3,
+          "cost": "free",
+          "reasoning_score": 9.8,
+          "average_response_time": 1.97
+        },
+        {
+          "id": "mistralai/mistral-nemo:free",
+          "name": "Mistral Nemo (Free)",
+          "description": "Fast processing with perfect metabolite detection and reliable architecture",
+          "max_tokens": 8192,
+          "context_length": 131072,
           "priority": 4,
-          "cost": "free"
+          "cost": "free",
+          "reasoning_score": 9.7,
+          "average_response_time": 2.86
+        },
+        {
+          "id": "meta-llama/llama-3.3-70b-instruct:free",
+          "name": "Meta Llama 3.3 70B Instruct (Free)",
+          "description": "Enterprise-grade model with fast processing and perfect detection",
+          "max_tokens": 8192,
+          "context_length": 65536,
+          "priority": 5,
+          "cost": "free",
+          "reasoning_score": 9.6,
+          "average_response_time": 3.21
+        },
+        {
+          "id": "google/gemma-3-12b-it:free",
+          "name": "Google Gemma 3 12B (Free)",
+          "description": "Balanced performance with good speed and perfect metabolite detection",
+          "max_tokens": 8192,
+          "context_length": 96000,
+          "priority": 6,
+          "cost": "free",
+          "reasoning_score": 9.5,
+          "average_response_time": 3.92
+        },
+        {
+          "id": "mistralai/mistral-small-3.2-24b-instruct:free",
+          "name": "Mistral Small 3.2 24B (Free)",
+          "description": "Solid performance with good speed and perfect metabolite detection",
+          "max_tokens": 8192,
+          "context_length": 96000,
+          "priority": 7,
+          "cost": "free",
+          "reasoning_score": 9.4,
+          "average_response_time": 4.1
+        },
+        {
+          "id": "deepseek/deepseek-chat:free",
+          "name": "DeepSeek V3 (Free)",
+          "description": "Proven reliability with good speed and perfect metabolite detection",
+          "max_tokens": 8192,
+          "context_length": 163840,
+          "priority": 8,
+          "cost": "free",
+          "reasoning_score": 9.3,
+          "average_response_time": 4.6
+        },
+        {
+          "id": "google/gemma-3-27b-it:free",
+          "name": "Google Gemma 3 27B (Free)",
+          "description": "Detailed responses with good speed and perfect metabolite detection",
+          "max_tokens": 8192,
+          "context_length": 96000,
+          "priority": 9,
+          "cost": "free",
+          "reasoning_score": 9.2,
+          "average_response_time": 4.76
+        },
+        {
+          "id": "moonshotai/kimi-vl-a3b-thinking:free",
+          "name": "Moonshot AI Kimi VL A3B Thinking (Free)",
+          "description": "Comprehensive analysis with detailed responses and perfect detection",
+          "max_tokens": 8192,
+          "context_length": 131072,
+          "priority": 10,
+          "cost": "free",
+          "reasoning_score": 9.1,
+          "average_response_time": 7.29
+        },
+        {
+          "id": "deepseek/deepseek-v3-base:free",
+          "name": "DeepSeek V3 Base (Free)",
+          "description": "Advanced base model with good performance and perfect detection",
+          "max_tokens": 8192,
+          "context_length": 163840,
+          "priority": 11,
+          "cost": "free",
+          "reasoning_score": 9.0,
+          "average_response_time": 8.01
+        },
+        {
+          "id": "qwen/qwen3-235b-a22b:free",
+          "name": "Qwen3 235B A22B (Free)",
+          "description": "Massive 235B model with powerful performance and perfect detection",
+          "max_tokens": 8192,
+          "context_length": 131072,
+          "priority": 12,
+          "cost": "free",
+          "reasoning_score": 8.9,
+          "average_response_time": 8.1
+        },
+        {
+          "id": "tngtech/deepseek-r1t-chimera:free",
+          "name": "TNG DeepSeek R1T Chimera (Free)",
+          "description": "Thorough analysis with R1 reasoning style and perfect detection",
+          "max_tokens": 8192,
+          "context_length": 163840,
+          "priority": 13,
+          "cost": "free",
+          "reasoning_score": 8.8,
+          "average_response_time": 9.06
+        },
+        {
+          "id": "nousresearch/deephermes-3-llama-3-8b-preview:free",
+          "name": "Nous DeepHermes 3 Llama 3 8B Preview (Free)",
+          "description": "Ultra-fast with good metabolite detection and Nous Research quality",
+          "max_tokens": 8192,
+          "context_length": 131072,
+          "priority": 14,
+          "cost": "free",
+          "reasoning_score": 8.5,
+          "average_response_time": 1.75
+        },
+        {
+          "id": "moonshotai/kimi-k2:free",
+          "name": "MoonshotAI Kimi K2 (Free)",
+          "description": "Fast processing with good metabolite detection and efficient performance",
+          "max_tokens": 8192,
+          "context_length": 65536,
+          "priority": 15,
+          "cost": "free",
+          "reasoning_score": 8.4,
+          "average_response_time": 2.22
         }
       ]
     }
