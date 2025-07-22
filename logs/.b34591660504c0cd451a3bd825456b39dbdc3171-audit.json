@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/Mark/Research/fallback_llm/logs/.b34591660504c0cd451a3bd825456b39dbdc3171-audit.json",
+    "files": [
+        {
+            "date": 1753203372532,
+            "name": "/Users/Mark/Research/fallback_llm/logs/mcp-puppeteer-2025-07-22.log",
+            "hash": "65b11ded7937e5896ccc93dcbd808966551d277575bc1b230e8f584eed1c1d7b"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,14 @@
+# Fallback LLM System - Python Dependencies
+
+# Core dependencies
+requests>=2.25.0
+
+# Optional dependencies for enhanced functionality
+# python-dotenv>=0.19.0  # For .env file support (optional - built-in support included)
+# colorama>=0.4.4        # For colored terminal output (optional)
+# rich>=10.0.0           # For enhanced terminal formatting (optional)
+
+# Development dependencies (optional)
+# pytest>=6.0.0         # For testing
+# black>=21.0.0          # For code formatting
+# flake8>=3.8.0          # For linting

@@ -1,0 +1,155 @@
+{
+  "providers": {
+    "cerebras": {
+      "name": "Cerebras",
+      "api_url": "https://api.cerebras.ai/v1/chat/completions",
+      "description": "High-performance AI inference platform with fast response times",
+      "priority": 1,
+      "models": [
+        {
+          "id": "llama-4-scout-17b-16e-instruct",
+          "name": "Llama 4 Scout 17B",
+          "description": "Latest Llama 4 model optimized for instruction following",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 1
+        },
+        {
+          "id": "llama-3.3-70b",
+          "name": "Llama 3.3 70B",
+          "description": "Large parameter model with excellent reasoning capabilities",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 2
+        },
+        {
+          "id": "llama3.1-8b",
+          "name": "Llama 3.1 8B",
+          "description": "Efficient model with good performance for general tasks",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 3
+        },
+        {
+          "id": "qwen-3-32b",
+          "name": "Qwen 3 32B",
+          "description": "Advanced reasoning model with strong analytical capabilities",
+          "max_tokens": 8192,
+          "context_length": 32768,
+          "priority": 4
+        }
+      ]
+    },
+    "groq": {
+      "name": "Groq",
+      "api_url": "https://api.groq.com/openai/v1/chat/completions",
+      "description": "Ultra-fast AI inference with specialized hardware acceleration",
+      "priority": 2,
+      "models": [
+        {
+          "id": "meta-llama/llama-4-maverick-17b-128e-instruct",
+          "name": "Llama 4 Maverick 17B",
+          "description": "Latest Llama 4 variant with extended context",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 1
+        },
+        {
+          "id": "meta-llama/llama-4-scout-17b-16e-instruct",
+          "name": "Llama 4 Scout 17B",
+          "description": "Instruction-tuned Llama 4 model",
+          "max_tokens": 8192,
+          "context_length": 16384,
+          "priority": 2
+        },
+        {
+          "id": "qwen/qwen3-32b",
+          "name": "Qwen 3 32B",
+          "description": "High-performance reasoning model",
+          "max_tokens": 8192,
+          "context_length": 32768,
+          "priority": 3
+        },
+        {
+          "id": "llama-3.1-8b-instant",
+          "name": "Llama 3.1 8B Instant",
+          "description": "Fast and efficient model for quick responses",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 4
+        },
+        {
+          "id": "llama-3.3-70b-versatile",
+          "name": "Llama 3.3 70B Versatile",
+          "description": "Large model optimized for diverse tasks",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 5
+        }
+      ]
+    },
+    "openrouter": {
+      "name": "OpenRouter",
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "description": "Gateway to multiple AI models with free tier options",
+      "priority": 3,
+      "models": [
+        {
+          "id": "mistralai/mistral-nemo:free",
+          "name": "Mistral Nemo (Free)",
+          "description": "High-quality free model from Mistral AI",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 1,
+          "cost": "free"
+        },
+        {
+          "id": "tngtech/deepseek-r1t-chimera:free",
+          "name": "DeepSeek R1T Chimera (Free)",
+          "description": "Advanced reasoning model with strong analytical capabilities",
+          "max_tokens": 8192,
+          "context_length": 32768,
+          "priority": 2,
+          "cost": "free"
+        },
+        {
+          "id": "google/gemini-2.0-flash-exp:free",
+          "name": "Google Gemini 2.0 Flash (Free)",
+          "description": "Google's latest experimental model",
+          "max_tokens": 8192,
+          "context_length": 1000000,
+          "priority": 3,
+          "cost": "free"
+        },
+        {
+          "id": "mistralai/mistral-small-3.1-24b-instruct:free",
+          "name": "Mistral Small 3.1 (Free)",
+          "description": "Efficient instruction-following model",
+          "max_tokens": 8192,
+          "context_length": 128000,
+          "priority": 4,
+          "cost": "free"
+        }
+      ]
+    }
+  },
+  "fallback_order": ["cerebras", "groq", "openrouter"],
+  "retry_config": {
+    "max_attempts": 5,
+    "base_delay": 2.0,
+    "max_delay": 60.0,
+    "exponential_base": 2.0,
+    "jitter": true,
+    "jitter_range": [0.8, 1.0]
+  },
+  "default_settings": {
+    "max_tokens": 500,
+    "temperature": 0.1,
+    "timeout": 30
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2025-01-21",
+    "description": "Configuration for Fallback LLM System with multi-provider support"
+  }
+}
